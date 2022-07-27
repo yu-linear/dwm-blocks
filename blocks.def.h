@@ -3,7 +3,10 @@ static const Block blocks[] = {
 	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
 	{"Mem:", "free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g",	30,		0},
 
-	{"", "date '+%b %d (%a) %I:%M%p'",					5,		0},
+	{"", "date '+%b %d (%a) %I:%M%p'",					60,		0},
+	{"Cpu:",
+         "grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage \"%\"}'",
+         5,		0},
 };
 
 //sets delimeter between status commands. NULL character ('\0') means no delimeter.
